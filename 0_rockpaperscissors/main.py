@@ -46,10 +46,10 @@ def test(x, weights):
 
 def main():
     print("0.Exit\n1. Rock\n2. Paper\n3. Scissors\n\n")
-    layers = [3, 90, 3]
+    layers = [10, 90, 30, 3]
     weights = create(layers)
     counter = [0, 0, 0]
-    last = [i % 3 for i in range(10)]
+    last = []
     x = np.array([last[-layers[0]:]])
     while True:
         option = input("> ")
@@ -80,10 +80,13 @@ def main():
         else:
             s = "Lose"
             counter[2] += 1
-        print("%4s   %d | %d | %d (w|t|l)" % (s, *counter))
+        print("%4s   %d | %d | %d (w|t|l) %.2f | %.2f | %.2f" %
+              (s, *counter, counter[0] / sum(counter),
+               counter[1] / sum(counter), counter[2] / sum(counter)))
         y = np.array([[0 if ((i + 1) % 3 == option % 3) else
                        (0.5 if i == option else 1) for i in range(3)]])
-        weights = train(x, y, weights, 10000)
+        if len(last) > layers[0] + 1:
+            weights = train(x, y, weights, 1000)
         x = np.array([last[-layers[0]:]])
 
 
