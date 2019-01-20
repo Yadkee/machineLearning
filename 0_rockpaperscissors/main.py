@@ -1,7 +1,12 @@
 #! python3
+import random
+
 import numpy as np
 
-# Learnt here -> https://iamtrask.github.io/2015/07/12/basic-python-network/
+# Learnt here -> http://iamtrask.github.io/2015/07/12/basic-python-network/
+#             -> http://iamtrask.github.io/2015/07/27/python-network-part2/
+# And -> http://iamtrask.github.io/2015/11/15/anyone-can-code-lstm/
+#     -> http://iamtrask.github.io/2015/07/28/dropout/
 OPTIONS = set("123")
 NAMES = ("rock", "paper", "scissors")
 EXIT = {"0", "q", "exit"}
@@ -69,7 +74,10 @@ def main():
         option = int(option) - 1
         last.append(option)
 
-        machine = max((i, a) for a, i in enumerate(test(x, weights)[0]))[1]
+        if len(last) > layers[0] + 1:
+            machine = max((i, a) for a, i in enumerate(test(x, weights)[0]))[1]
+        else:
+            machine = random.randint(0, 2)
         print("[%8s] vs [%8s]" % (NAMES[option], NAMES[machine]))
         if (machine + 1) % 3 == option % 3:
             s = "Win"
@@ -83,9 +91,9 @@ def main():
         print("%4s   %d | %d | %d (w|t|l) %.2f | %.2f | %.2f" %
               (s, *counter, counter[0] / sum(counter),
                counter[1] / sum(counter), counter[2] / sum(counter)))
-        y = np.array([[0 if ((i + 1) % 3 == option % 3) else
-                       (0.5 if i == option else 1) for i in range(3)]])
         if len(last) > layers[0] + 1:
+            y = np.array([[0 if ((i + 1) % 3 == option % 3) else
+                           (0.5 if i == option else 1) for i in range(3)]])
             weights = train(x, y, weights, 1000)
         x = np.array([last[-layers[0]:]])
 
