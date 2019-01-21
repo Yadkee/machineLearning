@@ -7,10 +7,12 @@
 [Types of Neural Networks](https://medium.com/@shridhar743/a-beginners-guide-to-deep-learning-5ee814cf7706)
 
 [MLP/Backpropagation](http://iamtrask.github.io/2015/07/12/basic-python-network/)
-[Gradient](http://iamtrask.github.io/2015/07/27/python-network-part2/)
+ / [Gradient](http://iamtrask.github.io/2015/07/27/python-network-part2/)
 
 [RNN](http://iamtrask.github.io/2015/11/15/anyone-can-code-lstm/)
 
-[Low-level](https://medium.com/@d3lm/understand-tensorflow-by-mimicking-its-api-from-scratch-faa55787170d)
+[Low-level Tensorflow](https://medium.com/@d3lm/understand-tensorflow-by-mimicking-its-api-from-scratch-faa55787170d)
+
+[ML from sratch](https://github.com/eriklindernoren/ML-From-Scratch)
 
 [Raw Numpy NNs](https://github.com/iamtrask/Grokking-Deep-Learning)
