@@ -4,11 +4,6 @@ import random
 
 import numpy as np
 
-# Learnt here -> http://iamtrask.github.io/2015/07/12/basic-python-network/
-#             -> http://iamtrask.github.io/2015/07/27/python-network-part2/
-# And -> http://iamtrask.github.io/2015/11/15/anyone-can-code-lstm/
-#     -> http://iamtrask.github.io/2015/07/28/dropout/
-
 
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
@@ -20,8 +15,8 @@ def sigmoid_derivative(x):
 
 class Model:
     def __init__(self, layers):
-        self.weight = [2 * np.random.random((layers[a], layer)) - 1
-                       for a, layer in enumerate(layers[1:])]
+        self.weight = [2 * np.random.random((l1, l2)) - 1
+                       for l1, l2 in zip(layers, layers[1:])]
 
     def forward(self, x):
         layer = [x]
@@ -58,6 +53,7 @@ class Model:
 
 
 def main():
+    epochs = 1000
     layers = [10, 90, 30, 3]
     model = Model(layers)
 
@@ -135,7 +131,7 @@ def main():
 
         if counter[3] >= layers[0]:
             y = correctChoice[number]
-            model.train(x, y, 1000)
+            model.train(x, y, epochs)
 
         last.append(number)
         last.append(machine)
